@@ -1537,6 +1537,8 @@ MonoBehaviour:
   recoilY: 8
   recoilReturnSpeed: 20
   recoilSnappiness: 8
+  currentRotation: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &971376021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,7 +1908,6 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1899558346}
   impactEffect: {fileID: 8244637674593811469, guid: d8145ec8113e1594fb33bcc3455c8601, type: 3}
   ammoText: {fileID: 0}
-  camRecoil: {fileID: 963194229}
 --- !u!1 &1599062119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2139,6 @@ MonoBehaviour:
   muzzleFlash: {fileID: 234455443}
   impactEffect: {fileID: 234455442}
   ammoText: {fileID: 0}
-  camRecoil: {fileID: 0}
 --- !u!1001 &1899558344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2281,6 +2281,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   mouseSensitivity: 2
+  recoilX: -8
+  recoilY: 4
+  recoilReturnSpeed: 8
+  recoilSnappiness: 12
 --- !u!114 &1900582538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,7 +2355,6 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1658263309}
   impactEffect: {fileID: 1658263308}
   ammoText: {fileID: 0}
-  camRecoil: {fileID: 0}
 --- !u!1 &2035549290
 GameObject:
   m_ObjectHideFlags: 0
