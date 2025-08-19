@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     // 상태 변경을 구독자(UI 등)에 알림
     public event Action<GameState> OnStateChanged;
+    public event Action OnReady;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         //    return;
         //}
         Instance = this;
+        OnReady?.Invoke();
         // 필요하면 DontDestroyOnLoad(gameObject);
     }
 

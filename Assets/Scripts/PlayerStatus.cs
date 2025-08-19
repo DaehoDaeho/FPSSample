@@ -10,6 +10,7 @@ public class PlayerStatus : MonoBehaviour
     public float CurrentHP => currentHP;
     public bool IsDead { get; private set; }
 
+    // 이벤트 등록을 하기 위함.
     public event Action<float, float> OnHpChanged; // (curr, max)
     public event Action OnDied;
 

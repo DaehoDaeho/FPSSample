@@ -3,7 +3,7 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [Header("UI Panels")]
-    public GameObject HUD_Group;      // Playing에서만 보임
+    [SerializeField] private GameObject HUD_Group;      // Playing에서만 보임
     public GameObject PausePanel;     // Paused에서 보임
     public GameObject GameOverPanel;  // GameOver에서 보임
 
@@ -12,19 +12,28 @@ public class UIController : MonoBehaviour
 
     void OnEnable()
     {
-        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnStateChanged += HandleStateChanged;
+        }
+        else
+        {
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.OnReady += HandleReady;
+            }
+        }
     }
 
     void OnDisable()
     {
-        
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged -= HandleStateChanged;
     }
 
     void Start()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnStateChanged += HandleStateChanged;
-
         // 시작 상태 반영
         if (GameManager.Instance != null)
             HandleStateChanged(GameManager.Instance.CurrentState);
@@ -58,4 +67,9 @@ public class UIController : MonoBehaviour
     // ── Buttons ────────────────────────────────────────────────
     public void Btn_Resume() => GameManager.Instance?.Resume();
     public void Btn_Restart() => GameManager.Instance?.RestartLevel();
+
+    public void HandleReady()
+    {
+        GameManager.Instance.OnStateChanged += HandleStateChanged;
+    }
 }
