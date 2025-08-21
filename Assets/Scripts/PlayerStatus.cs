@@ -26,9 +26,11 @@ public class PlayerStatus : MonoBehaviour
 
         currentHP = Mathf.Max(0f, currentHP - amount);
         RaiseHpChanged();
+        Debug.Log("플레이어 피격!!!");
 
         if (currentHP <= 0f)
         {
+            Debug.Log("플레이어 사망!!!");
             IsDead = true;
             OnDied?.Invoke();
 
