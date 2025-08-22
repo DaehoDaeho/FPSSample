@@ -14,14 +14,14 @@ public class UIController : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.OnStateChanged += HandleStateChanged;
+            //GameManager.Instance.OnStateChanged += HandleStateChanged;
         }
         else
         {
             GameManager gameManager = FindObjectOfType<GameManager>();
             if (gameManager != null)
             {
-                gameManager.OnReady += HandleReady;
+                //gameManager.OnReady += HandleReady;
             }
         }
     }
