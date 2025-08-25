@@ -1130,8 +1130,7 @@ GameObject:
   - component: {fileID: 438613118}
   - component: {fileID: 438613117}
   - component: {fileID: 438613116}
-  - component: {fileID: 438613115}
-  - component: {fileID: 438613114}
+  - component: {fileID: 438613123}
   m_Layer: 0
   m_Name: EnemyBoth
   m_TagString: Untagged
@@ -1139,50 +1138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &438613114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438613113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64c241b0602b5345bbc8d1ae0b56af8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerTag: Player
-  detectRange: 15
-  attackRange: 2.5
-  attackDamage: 15
-  hitRadius: 1.2
-  attackCooldown: 1.2
-  turnSpeed: 10
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 64
---- !u!114 &438613115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438613113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f144e1e6c9187e842ba6b708c71a5a06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerTag: Player
-  firePoint: {fileID: 249326868}
-  projectilePrefab: {fileID: 9211211112211234285, guid: f6ca4d4066a80404ca5f2abc7b4142fb, type: 3}
-  projectileSpeed: 20
-  projectileDamage: 10
-  fireRange: 15
-  fireCooldown: 1
-  turnSpeed: 10
 --- !u!195 &438613116
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1342,6 +1297,39 @@ Transform:
   - {fileID: 249326868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &438613123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438613113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f53fc16794719c4e858a7feefe2a910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerTag: Player
+  agent: {fileID: 438613116}
+  firePoint: {fileID: 249326868}
+  projectilePrefab: {fileID: 9211211112211234285, guid: f6ca4d4066a80404ca5f2abc7b4142fb, type: 3}
+  attackMode: 2
+  detectRange: 18
+  meleeRange: 2
+  rangedRange: 14
+  turnSpeed: 10
+  meleeExitBuffer: 0.3
+  rangedExitBuffer: 1
+  meleeDamage: 15
+  hitRadius: 1.2
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  meleeCooldown: 1.2
+  projectileSpeed: 20
+  projectileDamage: 10
+  rangedCooldown: 1
 --- !u!1 &515302457
 GameObject:
   m_ObjectHideFlags: 0
