@@ -1,6 +1,7 @@
 // PlayerWeaponController_OO.cs
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerWeaponController_OO : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerWeaponController_OO : MonoBehaviour
     public int startIndex = 0;
 
     [Header("UI (Optional)")]
-    public Text weaponNameText;
+    public TextMeshProUGUI weaponNameText;
 
     private int currentIndex = -1;
 
