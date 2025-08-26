@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5697988063516566537}
   - component: {fileID: 1226633813401175894}
   - component: {fileID: 1732729150268305055}
-  - component: {fileID: 7712597558101144733}
+  - component: {fileID: 4901901532584055107}
   m_Layer: 9
   m_Name: Projectile_Player
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7712597558101144733
+--- !u!114 &4901901532584055107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,10 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9211211112211234285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29009c06f44aba84fb961e03c3227020, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c207a5a7021c7943b06408287befb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 28
   lifetime: 3
-  damage: 10
-  playerTag: Player
+  damage: 12
+  enemyTag: Enemy
