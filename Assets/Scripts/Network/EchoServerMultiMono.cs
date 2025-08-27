@@ -33,7 +33,7 @@ public class EchoServerMultiMono : MonoBehaviour
     [Header("Server Options")]
     public int defaultPort = 7777;
     public int maxLogLines = 300;
-    public bool broadcastToAll = true;      // true: 전체 방송, false: 보낸 사람에게만 회신
+    public bool broadcastToAll = true;      // true: 전체 브로드캐스팅, false: 보낸 사람에게만 회신
     public bool allowExternalClients = false; // true: 0.0.0.0 바인딩(LAN 허용)
 
     // 런타임 상태

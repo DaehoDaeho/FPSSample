@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 53460324}
   - component: {fileID: 53460323}
   m_Layer: 5
-  m_Name: Stop
+  m_Name: StopButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,8 +205,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 162154104}
-        m_TargetAssemblyTypeName: EchoServerMono, Assembly-CSharp
+      - m_Target: {fileID: 950798805}
+        m_TargetAssemblyTypeName: EchoServerMultiMono, Assembly-CSharp
         m_MethodName: StopServerButton
         m_Mode: 1
         m_Arguments:
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 72932067}
   - component: {fileID: 72932066}
   m_Layer: 5
-  m_Name: ClientIPInput
+  m_Name: ClientIPInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 603526013}
   - component: {fileID: 603526012}
   m_Layer: 5
-  m_Name: ClientIMessageInput
+  m_Name: ClientIMessageInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2143,7 +2143,7 @@ GameObject:
   - component: {fileID: 870327778}
   - component: {fileID: 870327777}
   m_Layer: 5
-  m_Name: ClientIPortInput
+  m_Name: ClientIPortInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2318,7 +2318,7 @@ GameObject:
   - component: {fileID: 904526859}
   - component: {fileID: 904526858}
   m_Layer: 5
-  m_Name: Start
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2388,8 +2388,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 162154104}
-        m_TargetAssemblyTypeName: EchoServerMono, Assembly-CSharp
+      - m_Target: {fileID: 950798805}
+        m_TargetAssemblyTypeName: EchoServerMultiMono, Assembly-CSharp
         m_MethodName: StartServerButton
         m_Mode: 1
         m_Arguments:
@@ -2619,7 +2619,7 @@ MonoBehaviour:
   defaultPort: 7777
   maxLogLines: 300
   broadcastToAll: 1
-  allowExternalClients: 0
+  allowExternalClients: 1
 --- !u!4 &950798806
 Transform:
   m_ObjectHideFlags: 0
@@ -2648,7 +2648,7 @@ GameObject:
   - component: {fileID: 952586852}
   - component: {fileID: 952586851}
   m_Layer: 5
-  m_Name: ButtonSend
+  m_Name: SendButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2915,7 +2915,7 @@ GameObject:
   - component: {fileID: 1017405155}
   - component: {fileID: 1017405154}
   m_Layer: 5
-  m_Name: ButtonConnect
+  m_Name: ConnectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4098,7 +4098,7 @@ GameObject:
   - component: {fileID: 1800090548}
   - component: {fileID: 1800090547}
   m_Layer: 5
-  m_Name: ButtonDisconnect (1)
+  m_Name: DisconnectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4365,7 +4365,7 @@ GameObject:
   - component: {fileID: 1853399365}
   - component: {fileID: 1853399364}
   m_Layer: 5
-  m_Name: ServerPortInput
+  m_Name: ServerPortInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
