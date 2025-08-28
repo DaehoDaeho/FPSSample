@@ -75,45 +75,107 @@ public class NetworkUI_NGO : MonoBehaviour
     }
 
     // ----- 내부 도우미 -----
-
     private void UpdateStatusNow()
     {
         string role = "Offline";
 
-        if (NetworkManager.Singleton.IsHost == true)
+        if (NetworkManager.Singleton != null)
         {
-            role = "Host (Server+Client)";
-        }
-        else
-        {
-            if (NetworkManager.Singleton.IsServer == true)
+            if (NetworkManager.Singleton.IsHost == true)
             {
-                role = "Server";
+                role = "Host (Server+Client)";
             }
             else
             {
-                if (NetworkManager.Singleton.IsClient == true)
+                if (NetworkManager.Singleton.IsServer == true)
                 {
-                    role = "Client";
+                    role = "Server";
                 }
+                else
+                {
+                    if (NetworkManager.Singleton.IsClient == true)
+                    {
+                        role = "Client";
+                    }
+                }
+            }
+        }
+
+        bool connected = false;
+
+        if (NetworkManager.Singleton != null)
+        {
+            if (NetworkManager.Singleton.IsClient == true)
+            {
+                connected = NetworkManager.Singleton.IsConnectedClient;
             }
         }
 
         if (statusText != null)
         {
-            statusText.text = "Status: " + role;
+            if (connected == true)
+            {
+                statusText.text = "Status: " + role + " (Connected)";
+            }
+            else
+            {
+                statusText.text = "Status: " + role + " (Not Connected)";
+            }
         }
 
-        int count = 0;
+        int players = 0;
 
-        if (NetworkManager.Singleton.IsListening == true)
+        if (NetworkManager.Singleton != null)
         {
-            count = NetworkManager.Singleton.ConnectedClientsList.Count;
+            // ★ 서버/호스트에서만 서버 전용 컬렉션 사용
+            if (NetworkManager.Singleton.IsServer == true)
+            {
+                players = NetworkManager.Singleton.ConnectedClientsList.Count;
+            }
+            else
+            {
+                // ★ 클라이언트에서는 스폰된 Player 오브젝트 개수를 세서 표시
+                if (NetworkManager.Singleton.IsClient == true && connected == true)
+                {
+                    players = CountPlayersClientSide();
+                }
+            }
         }
 
         if (playersText != null)
         {
-            playersText.text = "Players: " + count.ToString();
+            playersText.text = "Players: " + players.ToString();
         }
+    }
+
+    private int CountPlayersClientSide()
+    {
+        if (NetworkManager.Singleton == null)
+        {
+            return 0;
+        }
+
+        if (NetworkManager.Singleton.SpawnManager == null)
+        {
+            return 0;
+        }
+
+        int count = 0;
+
+        // SpawnedObjects: Dictionary<ulong, NetworkObject>
+        foreach (var kv in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
+        {
+            NetworkObject no = kv.Value;
+
+            if (no != null)
+            {
+                if (no.IsPlayerObject == true)
+                {
+                    count = count + 1;
+                }
+            }
+        }
+
+        return count;
     }
 }
