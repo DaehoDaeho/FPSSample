@@ -1,16 +1,10 @@
-// NetworkPlayer.cs
-// ----------------------------------------------------
-// 역할:
-//   - 이 오브젝트가 네트워크로 스폰될 때(OnNetworkSpawn),
-//     내가 소유(Owner)한 플레이어라면 Main Camera를 CameraMount에 붙인다.
-// ----------------------------------------------------
-
 using UnityEngine;
 using Unity.Netcode;
 
 public class NetworkPlayer : NetworkBehaviour
 {
-    public Transform cameraMount;
+    public Transform cameraMount;   // 머리 위치
+    public Transform pitchPivot;    // 상하 회전용(카메라의 부모가 됨)
     public bool attachCameraOnOwner = true;
 
     public override void OnNetworkSpawn()
@@ -20,12 +14,18 @@ public class NetworkPlayer : NetworkBehaviour
             if (attachCameraOnOwner == true)
             {
                 Camera cam = Camera.main;
-
                 if (cam != null)
                 {
-                    if (cameraMount != null)
+                    Transform target = cameraMount;
+
+                    if (pitchPivot != null)
                     {
-                        cam.transform.SetParent(cameraMount);
+                        target = pitchPivot;  // ★ 핵심: PitchPivot에 붙인다
+                    }
+
+                    if (target != null)
+                    {
+                        cam.transform.SetParent(target);
                         cam.transform.localPosition = Vector3.zero;
                         cam.transform.localRotation = Quaternion.identity;
                     }

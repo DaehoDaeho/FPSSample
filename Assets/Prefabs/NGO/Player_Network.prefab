@@ -118,10 +118,11 @@ GameObject:
   - component: {fileID: 8699014415984870909}
   - component: {fileID: 41685698236503257}
   - component: {fileID: 9063874308531254741}
-  - component: {fileID: 7439996802926407448}
   - component: {fileID: 6866713651503809614}
   - component: {fileID: 2521642133624264641}
   - component: {fileID: 1536726979663896190}
+  - component: {fileID: 290659883798298184}
+  - component: {fileID: 4643003905043013666}
   m_Layer: 0
   m_Name: Player_Network
   m_TagString: Untagged
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1710347397
+  GlobalObjectIdHash: 2481384075
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -181,23 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMount: {fileID: 1179429394919892360}
+  pitchPivot: {fileID: 3681821023269979432}
   attachCameraOnOwner: 1
---- !u!114 &7439996802926407448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199675711790166658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76732f3caa6987f4da5e817703ff5267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  rotateSpeed: 150
-  gravity: 9.81
-  jumpSpeed: 5
 --- !u!114 &6866713651503809614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +255,38 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &290659883798298184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199675711790166658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762485d25b3d92a4fbc4c777fded14e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchPivot: {fileID: 3681821023269979432}
+  mouseSensitivity: 1.5
+  minPitch: -70
+  maxPitch: 70
+--- !u!114 &4643003905043013666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199675711790166658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250cc817ab6941f4e82a9347e851fe04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  rotateSpeed: 150
+  gravity: 9.81
+  jumpSpeed: 5
 --- !u!1 &4445230693827954971
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +298,7 @@ GameObject:
   - component: {fileID: 8046533896893329115}
   - component: {fileID: 6733274034167275563}
   - component: {fileID: 8270275716090315463}
+  - component: {fileID: 8225069394795554534}
   m_Layer: 0
   m_Name: WorldText
   m_TagString: Untagged
@@ -403,6 +422,27 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8225069394795554534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445230693827954971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ac5f00ebfe74f4e9f281b6ef89ce49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yawOnly: 1
+  targetCameraTransform: {fileID: 0}
+  hideWhenBehind: 1
+  behindDotThreshold: 0
+  distanceScaling: 1
+  nearDistance: 2
+  farDistance: 20
+  maxScale: 1
+  minScale: 0.6
 --- !u!1 &5222141730976552614
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +471,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3681821023269979432}
   m_Father: {fileID: 8699014415984870909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5387914193518549329
@@ -536,3 +577,34 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &5693444432736422589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3681821023269979432}
+  m_Layer: 0
+  m_Name: PitchPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3681821023269979432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693444432736422589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1179429394919892360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
