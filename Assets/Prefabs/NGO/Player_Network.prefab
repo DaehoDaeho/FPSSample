@@ -365,7 +365,6 @@ GameObject:
   - component: {fileID: 8300136502375449284}
   - component: {fileID: 5304919354294456499}
   - component: {fileID: 4144027058176818929}
-  - component: {fileID: 3278797982164702596}
   m_Layer: 0
   m_Name: HPText
   m_TagString: Untagged
@@ -490,27 +489,6 @@ MonoBehaviour:
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4144027058176818929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492745684277359047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ac5f00ebfe74f4e9f281b6ef89ce49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yawOnly: 1
-  targetCameraTransform: {fileID: 0}
-  hideWhenBehind: 1
-  behindDotThreshold: 0
-  distanceScaling: 1
-  nearDistance: 2
-  farDistance: 20
-  maxScale: 1
-  minScale: 0.6
---- !u!114 &3278797982164702596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
