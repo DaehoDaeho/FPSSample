@@ -1,4 +1,3 @@
-// HeadHPText.cs
 // ------------------------------------------------------
 // 역할:
 //   - 월드 공간 캔버스(Text)에 현재 HP를 숫자로 표시한다.
@@ -13,8 +12,8 @@ using TMPro;
 
 public class HeadHPText : MonoBehaviour
 {
-    public NetworkHealth health;   // 같은 오브젝트의 NetworkHealth 참조
-    public TMP_Text hpText;            // 월드 공간 캔버스의 Text
+    public NetworkHealth health;   // 같은 오브젝트의 NetworkHealth 참조.
+    public TMP_Text hpText;            // 월드 공간 캔버스의 Text.
 
     void Update()
     {

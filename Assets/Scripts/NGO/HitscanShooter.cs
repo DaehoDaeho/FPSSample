@@ -1,4 +1,3 @@
-// HitscanShooter.cs
 // ------------------------------------------------------
 // 역할:
 //   - 클라이언트(Owner)가 좌클릭을 하면 ServerRpc로 "발사 요청"을 보낸다.
@@ -16,15 +15,15 @@ using Unity.Netcode;
 public class HitscanShooter : NetworkBehaviour
 {
     public Transform shootPivot;    // 레이 시작점(반드시 PitchPivot 자식)
-    public float range = 60.0f;     // 사거리
-    public int damage = 25;         // 한 발 데미지
+    public float range = 60.0f;     // 사거리.
+    public int damage = 25;         // 한 발 데미지.
 
     public float fireCooldown = 0.2f; // 연사 쿨다운(초)
-    private float fireTimerClient = 0.0f; // 클라 쿨다운
+    private float fireTimerClient = 0.0f; // 클라 쿨다운.
 
-    public bool allowFriendlyFire = false; // 같은 팀 공격 허용 여부
+    public bool allowFriendlyFire = false; // 같은 팀 공격 허용 여부.
 
-    private float lastFireTimeServer = -9999.0f; // 서버 쿨다운 타임스탬프
+    private float lastFireTimeServer = -9999.0f; // 서버 쿨다운 타임스탬프.
 
     void Update()
     {
@@ -34,19 +33,19 @@ public class HitscanShooter : NetworkBehaviour
             return;
         }
 
-        // 클라 쿨다운 감소
+        // 클라 쿨다운 감소.
         fireTimerClient = fireTimerClient - Time.deltaTime;
         if (fireTimerClient < 0.0f)
         {
             fireTimerClient = 0.0f;
         }
 
-        // 좌클릭으로 발사 요청
+        // 좌클릭으로 발사 요청.
         if (Input.GetMouseButtonDown(0) == true)
         {
             if (fireTimerClient <= 0.0f)
             {
-                RequestFireServerRpc();   // 서버에게 "발사 판정" 요청
+                RequestFireServerRpc();   // 서버에게 "발사 판정" 요청.
                 fireTimerClient = fireCooldown;
             }
         }
@@ -63,28 +62,24 @@ public class HitscanShooter : NetworkBehaviour
         }
         lastFireTimeServer = Time.time;
 
-        // ShootPivot이 없으면 발사 불가
+        // ShootPivot이 없으면 발사 불가.
         if (shootPivot == null)
         {
             return;
         }
 
-        // 레이 시작점/방향: 내 시선(피벗) 기준
         Vector3 origin = shootPivot.position;
         Vector3 dir = shootPivot.forward;
 
-        // 레이캐스트로 맞은 대상 찾기(Trigger는 무시)
         RaycastHit hit;
         bool hitSomething = Physics.Raycast(origin, dir, out hit, range, ~0, QueryTriggerInteraction.Ignore);
 
         if (hitSomething == true)
         {
-            // 맞은 오브젝트 위/부모에서 NetworkHealth를 찾는다(콜라이더가 자식일 수 있음)
             NetworkHealth targetHealth = hit.collider.GetComponentInParent<NetworkHealth>();
-
             if (targetHealth != null)
             {
-                // 친선 사격 금지 옵션이 켜져 있으면 같은 팀은 무시
+                // 친선 사격 금지 체크.
                 if (allowFriendlyFire == false)
                 {
                     NetworkPlayerServerSetup mySetup = GetComponent<NetworkPlayerServerSetup>();
@@ -96,19 +91,15 @@ public class HitscanShooter : NetworkBehaviour
                         {
                             if (mySetup.team.Value == otherSetup.team.Value)
                             {
-                                // 같은 팀이면 데미지 주지 않음
                                 return;
                             }
                         }
                     }
                 }
 
-                // 서버에서 데미지 적용(모두에게 동기화됨)
-                targetHealth.ApplyDamageServer(damage);
+                // 가해자 정보(OwnerClientId)를 포함하여 데미지 적용.
+                targetHealth.ApplyDamageServer(damage, OwnerClientId);
             }
-
-            // (선택) 맞은 지점에 히트 이펙트를 네트워크로 뿌리고 싶으면
-            //       "NetworkObject를 가진 스파크 프리팹"을 서버에서 Spawn하면 된다.
         }
     }
 }
