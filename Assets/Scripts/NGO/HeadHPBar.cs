@@ -34,7 +34,8 @@ public class HeadHPBar : MonoBehaviour
             max = 1;
         }
 
-        float value = (float)cur / (float)max;
+        float value = (float)cur / (float)max;  // 0 ~ 1 사이의 값으로 환산을 하기 위해.
+        // 최대 hp : 100, 현재 hp : 50 -> 50 / 100 = 0.5
 
         slider.value = value;
 

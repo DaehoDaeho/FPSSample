@@ -74,6 +74,7 @@ public class NetworkHealth : NetworkBehaviour
         }
     }
 
+    // 함수 오버로딩(Overloading) 이름이 같고 파라미터의 개수가 다른 함수를 선언.
     // 기존 ApplyDamageServer(int) 대신 "가해자 정보 포함" 오버로드를 추가.
     public void ApplyDamageServer(int amount, ulong attackerClientId)
     {

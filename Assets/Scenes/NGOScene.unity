@@ -2119,8 +2119,8 @@ MonoBehaviour:
     m_InternalValue: 0
   matchTimeSeconds:
     m_InternalValue: 0
-  killFeedUI: {fileID: 0}
-  scoreboardUI: {fileID: 0}
+  killFeedUI: {fileID: 1823005989}
+  scoreboardUI: {fileID: 1823005990}
 --- !u!1 &1429185180
 GameObject:
   m_ObjectHideFlags: 0
