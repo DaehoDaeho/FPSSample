@@ -1,35 +1,37 @@
 // ------------------------------------------------------
 // 역할:
-//   - Animator에 Speed(0~1)와 IsGrounded를 매 프레임 갱신.
-//   - 이동은 CharacterController가 하고, 우리는 "보이는 속도"만 계산.
+//   - 매 프레임 "보이는" 이동 속도(0~1)와 지면 상태를 계산해서 Animator에 넣는다.
+//   - 이동은 CharacterController(루트)가 하고, 우리는 위치 변화로 속도를 추정한다.
 // 전제:
-//   - 같은 오브젝트에 Animator, CharacterController 존재.
-//   - ServerAuthoritativeMotor의 moveSpeed 값을 참조(없으면 기본 4.0f).
+//   - 이 스크립트는 MeshRoot(Animator가 있는 곳)에 붙인다.
+//   - 루트의 CharacterController와 ServerAuthoritativeMotor를 부모에서 찾아 사용한다.
 using UnityEngine;
 
-//[RequireComponent(typeof(Animator))]
-//[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimationLocomotion : MonoBehaviour
 {
-    public ServerAuthoritativeMotor motor; // 선택: 없으면 기본속도 사용
-    public float speedSmooth = 10.0f;      // 화면용 속도 보정
+    public ServerAuthoritativeMotor motor;   // 선택(없으면 자동으로 부모에서 찾음)
+    public float speedSmooth = 10.0f;        // 속도 보간(시각용)
 
-    public Animator anim;
-    public CharacterController cc;
-
+    private Animator anim;
+    private CharacterController cc;          // 부모의 CC 참조.
     private Vector3 prevPos;
     private float smoothedSpeed01 = 0.0f;
-    private float moveSpeedRef = 4.0f;
+    private float moveSpeedRef = 4.0f;       // motor.moveSpeed 참조.
 
     void Awake()
     {
-        //anim = GetComponent<Animator>();
-        //cc = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
+        cc = GetComponentInParent<CharacterController>();
         prevPos = transform.position;
     }
 
     void Start()
     {
+        if (motor == null)
+        {
+            motor = GetComponentInParent<ServerAuthoritativeMotor>();
+        }
         if (motor != null)
         {
             moveSpeedRef = motor.moveSpeed;
@@ -38,7 +40,7 @@ public class PlayerAnimationLocomotion : MonoBehaviour
 
     void Update()
     {
-        // 수평 속도 계산
+        // 수평 속도 계산(네트워크 보간된 트랜스폼 기준)
         Vector3 curPos = transform.position;
         Vector3 delta = curPos - prevPos;
         delta.y = 0.0f;
@@ -50,32 +52,24 @@ public class PlayerAnimationLocomotion : MonoBehaviour
             speed = delta.magnitude / dt; // m/s
         }
 
-        // 0~1 정규화
         float norm = 0.0f;
         if (moveSpeedRef > 0.0f)
         {
             norm = Mathf.Clamp01(speed / moveSpeedRef);
         }
 
-        // 부드럽게
         smoothedSpeed01 = Mathf.Lerp(smoothedSpeed01, norm, Time.deltaTime * speedSmooth);
 
-        // Animator 적용
-        //anim.SetFloat("Speed", smoothedSpeed01);
-        bool move = false;
-        if(speed != 0.0f)
+        if (anim != null)
         {
-            move = true;
+            anim.SetFloat("Speed", smoothedSpeed01);
+            bool grounded = false;
+            if (cc != null)
+            {
+                grounded = cc.isGrounded;
+            }
+            anim.SetBool("IsGrounded", grounded);
         }
-
-        anim.SetBool("Move", move);
-
-        //bool grounded = false;
-        //if (cc != null)
-        //{
-        //    grounded = cc.isGrounded;
-        //}
-        //anim.SetBool("IsGrounded", grounded);
 
         prevPos = curPos;
     }
