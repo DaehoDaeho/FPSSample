@@ -19,6 +19,8 @@ public class PlayerAnimationLocomotion : MonoBehaviour
     private float smoothedSpeed01 = 0.0f;
     private float moveSpeedRef = 4.0f;       // motor.moveSpeed 참조.
 
+    private float forceUngroundedTimer = 0.0f;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -67,10 +69,26 @@ public class PlayerAnimationLocomotion : MonoBehaviour
             if (cc != null)
             {
                 grounded = cc.isGrounded;
+
+                if (forceUngroundedTimer > 0.0f)
+                {
+                    grounded = false;
+                    forceUngroundedTimer = forceUngroundedTimer - Time.deltaTime;
+                    if (forceUngroundedTimer < 0.0f)
+                    {
+                        forceUngroundedTimer = 0.0f;
+                    }
+                }
             }
             anim.SetBool("IsGrounded", grounded);
         }
 
         prevPos = curPos;
+    }
+
+    // Jump가 트리거되면 잠깐 "공중"으로 취급하고 싶을 때 호출
+    public void OnJumpTriggeredLocal()
+    {
+        forceUngroundedTimer = 0.10f; // 0.1초 정도
     }
 }

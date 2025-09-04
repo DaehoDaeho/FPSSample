@@ -47,6 +47,12 @@ public class HitscanShooter : NetworkBehaviour
             {
                 RequestFireServerRpc();   // 서버에게 "발사 판정" 요청.
                 fireTimerClient = fireCooldown;
+
+                PlayerAnimationRelay relay = GetComponentInChildren<PlayerAnimationRelay>();
+                if (relay != null)
+                {
+                    relay.ServerPlayFire();
+                }
             }
         }
     }

@@ -98,6 +98,12 @@ public class NetworkHealth : NetworkBehaviour
                 gm.ServerReportKill(lastAttackerClientId, OwnerClientId);
             }
 
+            PlayerAnimationRelay relay = GetComponentInChildren<PlayerAnimationRelay>();
+            if (relay != null)
+            {
+                relay.ServerPlayDie();
+            }
+
             StartRespawnCountdown();
         }
     }
@@ -139,6 +145,12 @@ public class NetworkHealth : NetworkBehaviour
         if (controller != null)
         {
             controller.enabled = true;
+        }
+
+        PlayerAnimationRelay relay2 = GetComponentInChildren<PlayerAnimationRelay>();
+        if (relay2 != null)
+        {
+            relay2.ServerPlayRespawn();
         }
     }
 }

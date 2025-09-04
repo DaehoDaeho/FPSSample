@@ -56,8 +56,8 @@ public class PlayerAnimationRelay : NetworkBehaviour
     {
         if (anim != null)
         {
-            //anim.ResetTrigger("Fire");
-            //anim.SetTrigger("Fire");
+            anim.ResetTrigger("Fire");
+            anim.SetTrigger("Fire");
         }
     }
 
@@ -66,8 +66,15 @@ public class PlayerAnimationRelay : NetworkBehaviour
     {
         if (anim != null)
         {
-            //anim.ResetTrigger("Jump");
-            //anim.SetTrigger("Jump");
+            anim.ResetTrigger("Jump");
+            anim.SetTrigger("Jump");
+        }
+
+        // 같은 오브젝트(메쉬 루트)에 붙어 있으니 바로 찾기.
+        PlayerAnimationLocomotion loco = GetComponent<PlayerAnimationLocomotion>();
+        if (loco != null)
+        {
+            loco.OnJumpTriggeredLocal();
         }
     }
 
@@ -76,8 +83,8 @@ public class PlayerAnimationRelay : NetworkBehaviour
     {
         if (anim != null)
         {
-            //anim.ResetTrigger("Die");
-            //anim.SetTrigger("Die");
+            anim.ResetTrigger("Die");
+            anim.SetTrigger("Die");
         }
     }
 
@@ -88,6 +95,7 @@ public class PlayerAnimationRelay : NetworkBehaviour
         {
             //anim.ResetTrigger("Respawn");
             //anim.SetTrigger("Respawn");
+            anim.SetFloat("Speed", 0.0f);
         }
     }
 }

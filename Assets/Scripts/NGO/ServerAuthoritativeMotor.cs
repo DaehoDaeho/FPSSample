@@ -181,6 +181,15 @@ public class ServerAuthoritativeMotor : NetworkBehaviour
         Vector3 displacement = velocity * Time.deltaTime;
         controller.Move(displacement);
 
+        if (srvWantsJump == true)
+        {
+            PlayerAnimationRelay relay = GetComponentInChildren<PlayerAnimationRelay>();
+            if (relay != null)
+            {
+                relay.ServerPlayJump();
+            }
+        }
+
         // 점프 트리거는 1회성.
         srvWantsJump = false;
     }
