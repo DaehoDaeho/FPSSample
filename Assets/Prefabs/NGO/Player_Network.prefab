@@ -1549,6 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3012561543937757303}
+  characterController: {fileID: 2521642133624264641}
 --- !u!4 &9164517480835861005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 235dfab6bb80166489cc6add3f853484, type: 3}

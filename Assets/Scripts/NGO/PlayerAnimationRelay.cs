@@ -11,10 +11,21 @@ using Unity.Netcode;
 public class PlayerAnimationRelay : NetworkBehaviour
 {
     public Animator anim;
+    public CharacterController characterController;
+
+    private bool deathRMActive = false;
+    private float orgHeight;
+    private Vector3 orgCenter;
+
+    public float deadHeight = 0.6f;
+    public float deadCenterY = 0.3f;
 
     void Awake()
     {
         //anim = GetComponent<Animator>();
+
+        orgHeight = characterController.height;
+        orgCenter = characterController.center;
     }
 
     // ------- 서버에서 호출하는 공개 메서드 -------
@@ -83,6 +94,12 @@ public class PlayerAnimationRelay : NetworkBehaviour
     {
         if (anim != null)
         {
+            deathRMActive = true;
+
+            characterController.height = deadHeight;
+            characterController.center = new Vector3(orgCenter.x, deadCenterY, orgCenter.z);
+
+            anim.applyRootMotion = true;
             anim.ResetTrigger("Die");
             anim.SetTrigger("Die");
         }
@@ -93,9 +110,14 @@ public class PlayerAnimationRelay : NetworkBehaviour
     {
         if (anim != null)
         {
-            //anim.ResetTrigger("Respawn");
-            //anim.SetTrigger("Respawn");
-            anim.SetFloat("Speed", 0.0f);
+            deathRMActive = false;
+
+            anim.applyRootMotion = false;
+            anim.ResetTrigger("Respawn");
+            anim.SetTrigger("Respawn");
+
+            characterController.height = orgHeight;
+            characterController.center = orgCenter;
         }
     }
 }

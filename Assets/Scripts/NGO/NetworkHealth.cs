@@ -150,6 +150,7 @@ public class NetworkHealth : NetworkBehaviour
         PlayerAnimationRelay relay2 = GetComponentInChildren<PlayerAnimationRelay>();
         if (relay2 != null)
         {
+            relay2.transform.localPosition = Vector3.zero;
             relay2.ServerPlayRespawn();
         }
     }
